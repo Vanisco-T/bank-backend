@@ -6,13 +6,16 @@ import mongoose from "mongoose"
 app.use(cors())
 app.use(express.json())
 app.use('/',Router)
-const mongoUrl="mongodb+srv://vanisco:vanisco@bank.wzky4qi.mongodb.net/?retryWrites=true&w=majority"
+import dotenv from "dotenv"
+
+dotenv.config()
+const mongoUrl=process.env.MONGO_CONNECTION
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{
     console.log("Connected to database")
 }).catch((e)=>console.log(e))
 
-app.listen(5000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("Server started")
 })
